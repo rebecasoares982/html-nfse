@@ -148,6 +148,15 @@
             justify-content: end;
         }
     
+        .bold {
+            font-weight: bold;
+            color: #000;
+            font-size: 16px
+        }
+
+        .font-small {
+            font-size: 13px;
+        }
         @page {
             size: a4 portrait;
             margin: 10px;
@@ -280,6 +289,10 @@
             #botaoImprimir {
                 display: none;
             }
+
+            .font-small {
+            font-size: 11px;
+        }
         }
     </style>
     
@@ -365,7 +378,9 @@
                             <b>CAIXA:</b> AG 3351 - CC 1346-5
                             <b>CHAVE PIX</b> - CNPJ: 05.277.208/0001-76
                            
-                            <div>** O IMAP, NOS TERMOS DO ARTIGO 15 DA LEI Nº 9.532/2017, GOZA DE ISENÇÃO AO PAGAMENTO DO IMPOSTO DE RENDA (IR) E DA CONTRIBUIÇÃO SOCIAL SOBRE O LUCRO LÍQUIDO (CSLL), SENDO VEDADA A RETENÇÃO NA FONTE DO IR, CONFORME ORIENTAÇÃO DA PRÓPRIA RECEITA FEDERAL (INCISO IV DO ARTIGO 4º DA INSTRUÇÃO NORMATIVA Nº 1234/2012).</div>
+                            <div class="font-small">
+                            <b class="bold">**</b> <i>O IMAP, NOS TERMOS DO ARTIGO 15 DA LEI Nº 9.532/2017, GOZA DE ISENÇÃO AO PAGAMENTO DO IMPOSTO DE RENDA (IR) E DA CONTRIBUIÇÃO SOCIAL SOBRE O LUCRO LÍQUIDO (CSLL), SENDO VEDADA A RETENÇÃO NA FONTE DO IR, CONFORME ORIENTAÇÃO DA PRÓPRIA RECEITA FEDERAL (INCISO IV DO ARTIGO 4º DA INSTRUÇÃO NORMATIVA Nº 1234/2012).</i> 
+                        </div>
                         </td>
                     </tr>
                 </tbody>
