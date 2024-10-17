@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nota Fiscal de Serviço Eletrônica (NFS-e)</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 15px;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+    
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .header {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+    
+        .header .dados-nota {
+            padding: 8px;
+            margin-left: 76px;
+            border: 1px solid #e6e6e6;
+            /*box-shadow: 0 0 25px rgba(29, 29, 29, 0.15);*/
+         }
+    
+        .header .dados-nota p {
+            padding-bottom: 3px;
+            margin-bottom: 3px;
+            font-size: 14px;
+        }
+    
+        .header img,
+        .section img {
+            width: 115px;
+        }
+    
+        .header h1 {
+            font-size: 22px;
+            margin: 0;
+            color: #000b21;
+            font-weight: 400;
+        }
+
+        .header h2 {
+            font-size: 18px;
+            margin: 0;
+            color: #000b21;
+            font-weight: 400;
+        }
+
+        .header h3 {
+            font-size: 15px;
+            margin: 0;
+            color: #000b21;
+            font-weight: 500;
+        }
+    
+        .header p {
+            margin: 0;
+        }
+ 
+        .section {
+            margin-bottom: 20px;
+        }
+    
+        .section h3 {
+            font-size: 18px;
+            color: #29912b;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+    
+        .section p {
+            margin: 5px 0;
+            color: #000b21;
+        }
+    
+        .section h4 {
+            margin: 12px 0px 8px 0px;
+            color: #000b21;
+        }
+
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    
+        .details-table th,
+        .details-table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+    
+        .details-table th {
+            background-color: #f1f1f1;
+            color: #333;
+        }
+    
+        .details-table td {
+            white-space: pre-line;
+        }
+    
+        .summary p {
+            color: #333;
+        }
+    
+        .divider {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+    
+        #botaoImprimir {
+            background-color: #29912b;
+            color: white;
+            padding: 8px 15px;
+            margin: 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 3px;
+        }
+    
+        .container-imprimir {
+            background-color: #f8f9fa;
+            max-width: 800px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: end;
+        }
+    
+        .bold {
+            font-weight: bold;
+            color: #000;
+            font-size: 16px
+        }
+
+        .font-small {
+            font-size: 13px;
+        }
+        @page {
+            size: a4 portrait;
+            margin: 10px;
+        }
+    
+        @media print {
+            body {
+                font-size: 14px;
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 8px;
+                background-color: #fff;
+                padding: 8px;
+                box-shadow: none;
+            }
+
+            .header {
+                display: flex;
+                gap: 22px;
+                align-items: center;
+                padding-bottom: 3px;
+                margin-bottom: 5px;
+            }
+
+            .header .dados-nota {
+                padding: 5px;
+                margin-left: auto;
+                border: 1px solid #e6e6e6;
+            }
+
+            .header .dados-nota p {
+                padding-bottom: 1px;
+                margin-bottom: 1px;
+                font-size: 11px;
+            }
+
+            .header img,
+            .section img {
+                width: 90px;
+            }
+
+            .header h1 {
+                font-size: 16px;
+                margin: 0;
+                color: #000b21;
+                font-weight: 500;
+            }
+
+            .header h2 {
+                font-size: 15px;
+                margin: 0;
+                color: #000b21;
+                font-weight: 500;
+            }
+
+            .header h3 {
+                font-size: 14px;
+                margin: 0;
+                color: #000b21;
+                font-weight: 500;
+            }
+
+            .header p {
+                margin: 0;
+            }
+
+            .section {
+                margin-bottom: 5px;
+            }
+
+            .section h3 {
+                font-size: 14px;
+                color: #29912b;
+                padding-bottom: 3px;
+                margin-bottom: 5px;
+            }
+
+            .section p {
+                margin: 3px 0;
+                color: #000b21;
+                font-size: 12px;
+            }
+
+            .section h4 {
+                margin: 8px 0px 4px 0px;
+                color: #000b21;
+            }
+
+            .details-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 5px;
+                font-size: 12px;
+            }
+
+            .details-table th,
+            .details-table td {
+                border: 1px solid #dee2e6;
+                padding: 3px;
+                text-align: left;
+                vertical-align: top;
+            }
+
+            .details-table th {
+                background-color: #f1f1f1;
+                color: #333;
+            }
+
+            .details-table td {
+                white-space: pre-line;
+            }
+
+            .summary p {
+                color: #333;
+            }
+
+            .divider {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                padding-bottom: 3px;
+                margin-bottom: 5px;
+            }
+
+            #botaoImprimir {
+                display: none;
+            }
+
+            .font-small {
+            font-size: 11px;
+        }
+        }
+    </style>
+    
+</head>
+
+<body>
+
+    <div class="container-imprimir">
+        <button type="button" class="no-print" id="botaoImprimir" onclick="window.print();">Imprimir</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <img src="logo-mercado.png" class="logo-mercado" alt="Logo do Mercado">
+            <div>
+                <h1>Mercado Central</h1>
+                <h2>CNPJ: 12.345.678/0001-90</h2>
+                <br>
+                <h3>Nota Fiscal de Venda</h3>
+                <h3>Nota Nº 500982, emitida em 15/10/2024</h3>
+            </div>
+    
+            <div class="dados-nota">
+                <p><strong>Número da Nota:</strong>
+                    <br>
+                    500982
+                </p>
+                <p><strong>Data e Hora de Emissão:</strong>
+                    <br>
+                    15/10/2024 às 14:32:45
+                </p>
+                <p><strong>Código de Verificação:</strong>
+                    <br>
+                    ABCD-1234
+                </p>
+            </div>
+        </div>
+    
+        <hr>
+    
+        <div class="section">
+            <h3>Vendedor</h3>
+            <div class="divider">
+                <img src="logo-mercado.png" class="logo-mercado" alt="Logo do Mercado">
+                <div>
+                    <p><strong>Nome/Razão Social:</strong> Mercado Central Ltda.</p>
+                    <p><strong>CPF/CNPJ:</strong> 12.345.678/0001-90</p>
+                    <p><strong>Inscrição Municipal:</strong> 123.456/001-89</p>
+                    <p><strong>Endereço:</strong> Rua das Flores 123, Centro - Salvador - BA. CEP: 40000-000</p>
+                    <p><strong>E-mail:</strong> contato@mercadocentral.com.br</p>
+                </div>
+            </div>
+        </div>
+    
+        <hr>
+    
+        <div class="section">
+            <h3>Dados do Comprador</h3>
+            <p><strong>Nome/Razão Social:</strong> João da Silva</p>
+            <p><strong>CPF/CNPJ:</strong> 987.654.321-00</p>
+            <p><strong>Endereço:</strong> Rua Nova Esperança 456, Bairro Novo - Salvador, BA. CEP: 40010-000</p>
+            <p><strong>E-mail:</strong> joaodasilva@gmail.com</p>
+        </div>
+    
+        <hr>
+    
+        <div class="section">
+            <table class="details-table">
+                <thead>
+                    <tr>
+                        <th>Discriminação dos Produtos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div>
+                                <b>Produto:</b> Arroz Branco Tipo 1 - 5kg 
+                                <b>Quantidade:</b> 2 
+                                <b>Preço Unitário:</b> R$ 15,00 
+                                <b>Total:</b> R$ 30,00
+                            </div>
+                            <div>
+                                <b>Produto:</b> Feijão Carioca - 1kg 
+                                <b>Quantidade:</b> 3 
+                                <b>Preço Unitário:</b> R$ 8,00 
+                                <b>Total:</b> R$ 24,00
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    
+            <table class="details-table">
+                <thead>
+                    <tr>
+                        <th>Valor Total da Nota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>R$ 54,00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <hr>
+    
+        <div class="section summary">
+            <h4>CNAE:</h4>
+            <p>4711301 - Comércio varejista de mercadorias em geral.</p>
+    
+            <h4>Item da Lista de Produtos:</h4>
+            <p>0102 - Arroz, Feijão e Produtos Alimentícios.</p>
+    
+            <table class="details-table">
+                <thead>
+                    <tr>
+                        <th>Descontos (R$)</th>
+                        <th>Base de cálculo (R$)</th>
+                        <th>Alíquota (%)</th>
+                        <th>Valor do ICMS (R$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0,00</td>
+                        <td>54,00</td>
+                        <td>7,00%</td>
+                        <td>3,78</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <hr>
+    
+        <div class="section">
+            <h3>Outras informações:</h3>
+    
+            <table class="details-table">
+                <thead>
+                    <tr>
+                        <th>Valor INSS</th>
+                        <th>Valor PIS (R$)</th>
+                        <th>Valor COFINS (R$)</th>
+                        <th>Outras Retenções (R$)</th>
+                        <th>Valor Líquido (R$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0,00</td>
+                        <td>0,00</td>
+                        <td>0,00</td>
+                        <td>0,00</td>
+                        <td>54,00</td>
+                    </tr>
+                </tbody>
+            </table>
+    
+            <br>
+    
+            <div>
+                <p>- Esta Nota Fiscal foi emitida conforme as disposições da Lei nº 6.374/89.</p>
+                <p>- COMPETÊNCIA: 10/2024 (mês/ano)</p>
+                <p>- Código de Tributação do Município: 4711-3/01 - Comércio varejista de mercadorias</p>
+            </div>
+        </div>
+    
+    </div>
+    
+
+</body>
+
+</html>
